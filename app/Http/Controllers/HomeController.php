@@ -15,15 +15,14 @@ class HomeController extends Controller
     public function products(Request $request)
     {
         $data = [
-            'lower_price' => $request->lower_price,
-            'upper_price' => $request->upper_price,
-            'sort' => $request->sort
+            'harga' => $request->harga,
+            'qty' => $request->qty
         ];
 
         return $data;
     }
 
-    public function profile($username)
+    public function profil($username)
     {
         return $username;
     }

@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,46 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/profile/{username}', [HomeController::class, 'index']);
-
-
-
-Route::get('/products', [ProductController::class, 'index']);
-
-Route::get('/products/create', [ProductController::class, 'create']);
-
-Route::post('/products', [ProductController::class, 'insert']);
-
-Route::put('/products/{id}', [ProductController::class, 'update']);
-
-Route::delete('/products/{id}', [ProductController::class, 'delete']);
-
-/*
-Route::get('/home', function () {
-    return view('home');
+Route::get('/', function () {
+    return view('welcome');
 });
-
-Route::get('/user/{username}', function ($username) {
-    return 'Hallo ' . $username;
-});
-
-Route::get('category', function () {
-    echo request('sort');
-    echo '<br>';
-    echo request('rating');
-});
-
-Route::post('/register', function () {
-    $user = [
-        'name' => request('name'),
-        'email' => request('email'),
-        'password' => request('password')
-    ];
-
-    return $user;
-
-    // '<input type="text" name="nama_lengkap" value="daffa">';
-});
-*/

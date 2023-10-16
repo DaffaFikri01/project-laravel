@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,68 +9,48 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // $products = DB::table('products')
-        //     ->select('name', 'price', 'status')
-        //     ->where('status', 0)
-        //     ->get();
-
-        $products = Product::all();
-
+        $products = DB::table('products')
+            ->select('name', 'harga')
+            ->orderByDesc('id')
+            ->where('status', 0)
+            ->get();
         return $products;
-        // return view('index', [
-        //     'products' => $products
-        // ]);
     }
 
-    public function create()
-    {
-        return view('form');
-    }
-
-    public function insert(Request $request)
+    public function store(Request $request)
     {
         $data = [
             'name' => $request->name,
-            'price' => $request->price,
-            'qty' => $request->qty,
+            'harga' => $request->harga,
             'status' => $request->status
         ];
 
-        // DB::table('products')->insert($data);
-        $product = Product::create($data);
+        DB::table('products')->insert($data);
 
-        return $product;
+        return $data;
     }
 
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-
         $data = [
             'name' => $request->name,
-            'price' => $request->price,
-            'qty' => $request->qty,
+            'harga' => $request->harga,
             'status' => $request->status
         ];
 
-        // DB::table('products')
-        //     ->where('id', $id)
-        //     ->update($data);
-
-        $product->update($data);
+        DB::table('products')
+            ->where('id', $id)
+            ->update($data);
 
         return $data;
     }
 
     public function delete($id)
     {
-        $product = Product::findOrFail($id);
 
-        // DB::table('products')
-        //     ->where('id', $id)
-        //     ->delete();
-
-        $product->delete();
+        DB::table('products')
+            ->where('id', $id)
+            ->delete();
 
         return 'berhasil dihapus';
     }
